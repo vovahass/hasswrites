@@ -1,0 +1,62 @@
+<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
+
+    <div class="container-fluid">
+        <a class="navbar-brand text-secondary" href="/">HassWrites</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar"
+            aria-controls="collapseNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapseNavbar">
+            <ul class="navbar-nav me-auto mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom <% if (genre=='All Literature') { %> active <% } %>" href="/literature">Main</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom <% if (genre=='Novels') { %> active <% }%>" href="/novels">Novels</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-link-custom dropdown-toggle <% if ((genre=='Teenage Years Poetry') || (genre=='Free Verse Poetry') || (genre=='Haiku Poems')) { %> active <% }%>" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Poetry
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item nav-link p-2" href="/freeverse">Free Verse</a></li>
+                        <li><a class="dropdown-item nav-link p-2" href="/haiku">Haiku</a></li>
+                        <li><a class="dropdown-item nav-link p-2" href="/teenageyears">Teenage Years</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom <% if (genre=='Inspirational Quotes') { %> active <% }%>" href="/quotes">Quotes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom <% if (genre=='Writing Prompts') { %> active <% } %>" href="/writingprompts">Prompts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom <% if (genre=='About Me') { %> active <% } %>" href="/aboutme">About Me</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ml-auto me-1 navbar-signup">
+                <% if(!currentUser) {%>
+                    <a class="nav-link nav-link-custom" href="/login"><i class="fas fa-sign-in-alt"></i> Sign Up</a>
+                <%}else{ %>
+                    <a class="nav-link nav-link-custom dropdown-toggle" href="#" id="dropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= currentUser.username %> 
+                    </a>
+                    <ul class="dropdown-menu user-dropdown" aria-labelledby="dropdownUser" >
+                        <li><a class="dropdown-item nav-link p-2" href="/user">User Page</a></li>
+                        <% if (currentUser.username==process.env.ADMIN) {%>
+                        <li><a class="dropdown-item nav-link p-2" href="/user/banned">Banned Users</a></li>
+                        <% } %> 
+                        <li><a class="dropdown-item nav-link p-2" href="/logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+                    </ul>                
+                <% }%>
+            </div>
+            <!-- <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search by tag" aria-label="Search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </form> -->
+        </div>
+    </div>
+</nav>
+
+

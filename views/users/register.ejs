@@ -1,0 +1,54 @@
+<% layout ('layouts/boilerplateSecondary') %>
+
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="row">
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <div class="card shadow-lg bg-main">
+                    <img src="https://res.cloudinary.com/dkhmagpta/image/upload/v1611087529/Photo_by_Andrew_Seaman_on_Unsplash_nlqlcc.jpg"
+                        alt="" class="card-img-top p-2">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Register</h2>
+                        <form action="/register" method="POST" novalidate class="validated-form">
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" maxlength="20" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Display Name</label>
+                                <input class="form-control" type="text" id="name" name="name" maxlength="30" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="textColor">Choose Your Comment Color</label>
+                                <input class="form-control color-picker" type="color" id="textColor" name="textColor"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="commentBoxTheme">Choose Your Comment Box Theme</label>
+                                <select class="form-select" id="commentBoxTheme" name="commentBoxTheme" required>
+                                    <option selected></option>
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                            <!-- <div class="mb-3">
+                            <label class="form-label" for="password">Confirm Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                        </div> -->
+                            <button class="btn btn-secondary">Submit</button>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

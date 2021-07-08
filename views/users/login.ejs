@@ -1,0 +1,35 @@
+<% layout ('layouts/boilerplateSecondary') %>
+
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="row">
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <div class="card shadow-lg bg-main">
+                    <img src="https://res.cloudinary.com/dkhmagpta/image/upload/v1611087548/Photo_by_Patrick_Fore_on_Unsplash_eie2ia.jpg"
+                        alt="" class="card-img-top p-2">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Login</h2>
+                        <form action="/login" method="POST" novalidate class="validated-form">
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                            <button class="btn btn-secondary">Login</button>
+                        </form>
+
+                        <div class="mt-5">
+                            <p>
+                                Don't have an account? Create one <a class="btn btn-secondary btn-sm px-2 py-0"
+                                    href="/register">Here</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

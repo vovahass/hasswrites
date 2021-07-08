@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplateSecondary') %>
+<div class="row">
+    <h1 class="text-center mb-5">New Literary Work</h1>
+    <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <form action="/literature" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="literature[title]" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="body">Content</label>
+                <textarea class="form-control" type="text" id="body" name="literature[body]" style="height: 10rem;"
+                    required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <select class="form-select" id="genre" name="literature[genre]" required onchange="quoteCheck(this);">
+                    <option selected></option>
+                    <option value="Novel">Novel</option>
+                    <option value="Poem">Poem</option>
+                    <option value="Poem (Youth)">Poem (Youth)</option>
+                    <option value="Poem (Haiku)">Haiku</option>
+                    <option value="Quote">Quote</option>
+                    <option value="Writing Prompt">Writing Prompt</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="mb-3" style="display: none;" id="quoteByDiv">
+                <label class="form-label" for="quoteBy">Quote by</label>
+                <input class="form-control" type="text" id="quoteBy" name="literature[quoteBy]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="notes">My Notes</label>
+                <textarea class="form-control" type="text" id="notes" name="literature[notes]"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tags">Tags</label>
+                <input class="form-control" type="text" id="tags" name="literature[tags]" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Add Image</label>
+                <input class="form-control" type="file" id="image" name="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="notes">Credit image to</label>
+                <input class="form-control" type="text" id="notes" name="literature[imageCredit]">
+            </div>
+            <div class="mb-3 text-center d-flex justify-content-between mb-5">
+                <a class="btn btn-light" href="/literature">Back to Main</a>
+                <button class="btn btn-secondary">Add New Work</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="/javascripts/quoteCheck.js"></script>

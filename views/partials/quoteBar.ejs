@@ -1,0 +1,16 @@
+<% if (genre=="All Literature") {%> 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark py-1 text-light my-2">
+    <span class="px-2" style="font-weight: 500; width:11rem;"> Quote of the Day:</span>
+    <div id="quote-container" class="container-fluid">
+        <div class="quote-banner">
+            <!-- <span style="font-weight:500">Quote of The Day:</span> -->
+                <% if (quotes) {%>
+                    <div class="quote">
+                        <span style="white-space: pre-wrap;">   <%=quotes[0].body%></span> 
+                        <span style="white-space: pre-wrap;">         ~ <%=quotes[0].quoteBy%>.</span>
+                    </div>
+                <% } %> 
+        </div>
+    </div>
+</nav>
+<% } %> 

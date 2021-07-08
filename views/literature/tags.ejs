@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplateSecondary') %>
+
+<div class="container">
+    <h1 class="text-center mb-3">All Tags</h1>
+    <div class="row">
+        <div class="card shadow-lg bg-main p-0 col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3" style="min-width: auto;">
+            <div class="card-body p-2 m-2 ">
+                <% for (tag of tags) {%>
+                    <a class="btn btn-secondary p-1 m-1" href="/literature/tags/<%=tag%>"><%=tag%></a>
+                <% } %>  
+            </div>
+        </div>
+    </div>
+</div>

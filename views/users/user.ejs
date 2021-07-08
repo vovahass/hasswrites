@@ -1,0 +1,84 @@
+<% layout ('layouts/boilerplateSecondary') %>
+    <div class="row text-center">
+        <h2 >Hello, <%= user.name %>! </h2>
+        <h6 class="mb-5">On this page you can change your preferences.
+            <br>
+            (Don't forget to press 'Update' when you're done!)
+        </h4>
+        <div class="col-12 offset-0 col-sm-10 offset-sm-1">
+            <form action="/user?_method=PUT" method="POST" novalidate class="validated-form">
+               <div class="card shadow border border-2 border-secondary p-2 mb-5 bg-main">
+    
+                    <div class="card-header text-dark bg-light mb-5" >
+                        <h5> <%=user.username %></h5> 
+                        <% if (currentUser.status=="banned") {%> <h4 class="text-danger">(Account Banned!) </h4> <% } %> 
+                    </div>
+
+                    <h5 class="pb-3">Your Unique Number is: #<%=user.uniqueNumber%></h5>
+
+                    <h5 class="p-1">Display Name</h5>
+                    <div class="card-body mb-5 border border-2 border-light" >
+                        <h5 class="mb-3"> <%=user.name %></h5>
+                        <div class="mb-3">
+                            <a class="btn btn-light <% if (currentUser.status=="banned") {%> disabled <% } %>" data-bs-toggle="collapse" href="#collapseNameChanger"
+                                role="button" aria-expanded="false" aria-controls="collapseNameChanger">
+                                Change Display Name </a>
+                        </div>
+                        <div class="mb-3 collapse" id="collapseNameChanger">
+                            <div class="card card-body text-dark bg-light col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                                <label class="form-label" for="textColor">New Display Name:</label>
+                                <input class="form-control" type="text" id="name" name="name" value="<%=user.name %>" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="p-1">Comment Text Color</h5>
+                    <div class="card-body mb-5 border border-2 border-light" >
+                        <div class="card card-body mb-3 light-comment-box col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                            <label class="form-label" for="textColorCurrent">Current Comment Text Color:</label>
+                            <input class="form-control color-picker" type="color" id="textColorCurrent" name="textColorCurrent" required disabled
+                                value="<%=user.textColor %>">
+                        </div>
+                        <div class="mb-3">
+                            <a class="btn btn-light <% if (currentUser.status=="banned") {%> disabled <% } %>" data-bs-toggle="collapse" href="#collapseTextColor"
+                                role="button" aria-expanded="false" aria-controls="collapseTextColor">
+                                Change Color </a>
+                        </div>
+                        <div class="mb-3 collapse" id="collapseTextColor">
+                            <div class="card card-body text-dark bg-light col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                                <label class="form-label" for="textColor">Pick a new Comment Text Color</label>
+                                <input class="form-control color-picker" type="color" id="textColor" name="textColor" value="<%=user.textColor %>" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="p-1">Comment Box Theme</h5>
+                    <div class="card-body mb-5 border border-2 border-light">
+                        <div class="card card-body mb-3 light-comment-box col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                            <label class="form-label">Current Comment Box Theme: </label>
+                            <label class="form-label"><b><%= user.commentBoxTheme %></b></label>
+                        </div>
+                        <div class="mb-3">
+                            <a class="btn btn-light <% if (currentUser.status=="banned") {%> disabled <% } %>" data-bs-toggle="collapse" href="#collapseCommentTheme"
+                                role="button" aria-expanded="false" aria-controls="collapseCommentTheme">
+                                Change Theme </a>
+                        </div>
+                        <div class="mb-3 collapse" id="collapseCommentTheme">
+                            <div class="card card-body text-dark bg-light col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                                <label class="form-label" for="commentBoxTheme">Pick a new Comment Box Color</label>
+                                <select class="form-select color-picker" id="commentBoxTheme" name="commentBoxTheme" required>
+                                    <option value="light" <% if(user.commentBoxTheme=='light') {%> selected <% } %> >Light</option>
+                                    <option value="dark" <% if(user.commentBoxTheme=='dark') {%> selected <% } %> >Dark</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body mb-3 text-center">
+                        <button class="btn btn-secondary" <% if (currentUser.status=="banned") {%> disabled <% } %>>Update</button>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>

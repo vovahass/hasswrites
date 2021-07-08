@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HassWrites</title>
+
+    <link rel="stylesheet" href="/stylesheets/css/bootstrapedit.css">
+    <link href="/stylesheets/home.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600&family=Lato&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8d92dfa82a.js" crossorigin="anonymous"></script>
+
+</head>
+<body class="d-flex text-center text-secondary">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div class="justfiy-content-between">
+                <h3 class="float-md-start mt-3">HassWrites</h3>
+                <nav class="navbar justify-content-center float-md-end mb-5 p-0" role="navigation">
+                    <a class="nav-link active p-1" aria-current="page" href="#">Home</a>
+                    <a class="nav-link p-1" href="/literature">Literature</a>
+                    <a class="nav-link p-1" href="/aboutme">About Me</a>
+                
+                    <div class="navbar">
+                    <% if(!currentUser) { %>
+                            <a class="nav-link p-1" href="/login"><i class="fas fa-sign-in-alt"></i> Sign Up</a>
+                        <% } else { %>
+                            <a class="nav-link dropdown-toggle p-1" href="#" id="dropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= currentUser.username %> 
+                            </a>
+                            <ul class="dropdown-menu p-1" aria-labelledby="dropdownUser" style="position:absolute; left:auto;">
+                                <li><a class="dropdown-item nav-link-user" href="/user">User Page</a></li>
+                                <% if (currentUser.username==process.env.ADMIN) {%>
+                                <li><a class="dropdown-item nav-link-user" href="/user/banned">Banned Users</a></li>
+                                <% } %> 
+                                <li><a class="dropdown-item nav-link-user" href="/logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+                            </ul>  
+                        <% } %>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main class="px-3 pb-5">
+            <h1 class="mb-3">Welcome to HassWrites!</h1>
+            <p> Hello to anyone visiting and welcome! 
+                <br> I'm Hass, and I'm an amateur writer/poet with a passion for writing,
+                <br> and this project here is a little piece of me.
+                <br> Feel free to check out my work and leave comments,
+                <br> feedback is always appreciated! 
+            </p>
+            <a href="/literature" class="btn btn-lg btn-secondary my-3">View My Work!</a>
+        </main>
+        <footer class="nav-footer mt-auto text-secondary my-1">
+            <div class="float-md-end">
+                <p class="copyright" style="font-weight: 500;">&copy; HassWrites 2021</p>
+            </div>
+            <div class="justify-content-center float-md-start">
+                <a class="px-3 nav-icon" href="https://www.instagram.com/hasswrites/"><i class="fab fa-instagram"></i></a>
+                <a class="px-3 nav-icon" href="https://www.reddit.com/user/writingmadness"><i class="fab fa-reddit"></i></a>
+                <a class="px-3 nav-icon" href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/javascripts/js/bootstrap.js"></script>
+
+</body>
+
+</html>

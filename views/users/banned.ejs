@@ -1,0 +1,18 @@
+<% layout ('layouts/boilerplateSecondary') %>
+
+<div class="row">
+    <h1 class="text-center mb-5">List of all Banned users</h1>
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-log-4 offset-lg-4">
+        <% for (user of users) {%> 
+            <% if (user.status =="banned") {%>
+                <div class="card card-body p-1 bg-light mb-2"> 
+                    <form class="d-flex justify-content-between text-center" action="/user/banned/<%=user._id%>?_method=PUT" method="POST">
+                        <span class="m-2"><%= user.username %> </span>
+                        <span class="m-2"><%= user.email %> </span>
+                        <button id="banUser" class="btn btn-sm m-1 btn-success">Unban User</button>
+                    </form>
+                </div>
+            <% } %> 
+        <% } %>  
+    </div>
+</div>

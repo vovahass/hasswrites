@@ -1,0 +1,114 @@
+<% layout('layouts/boilerplate') %>
+
+
+    <div class='text-center mb-5 mt-2'>
+        <div class="col-12">
+            <h1 class="text-secondary"><%= genre %></h1>
+            <p>
+                <% if (genre=='Novels') {%>
+                    Here are some chapters out of novels that I have written\worked on throughout the years. I will be gradually releasing (and reworking) more chapters depending on interest.
+                <% } %> 
+                <% if (genre=='Free Verse Poetry') {%>
+                    Most of my recent poetry falls under this category. Nothing much to add here.
+                <% } %> 
+                <% if (genre=='Haiku Poems') {%>
+                    Basically, a haiku is a type of short poetry, originally from Japan, traditionally consisting of three phrases in a 5, 7, 5 syllable pattern.
+                <% } %> 
+                <% if (genre=='Teenage Years Poetry') {%>
+                    Well, here comes the awkward part, BUT - I decided I would be posting my old poetry here as well (all of these were written from ages 15 to 18). Viewer discretion is advised!
+                <% } %> 
+                <% if (genre=='Inspirational Quotes') {%>
+                    Here are some quotes that I find inspirational or profound, and that have in some way personally help me throughout my life. Some of these are mine, but most aren't (credit is obviously, given!).
+                <% } %> 
+                <% if (genre=='Writing Prompts') {%>
+                    These short stories were taken (and slightly edited) from Reddit (where I posted them). Most of these stories are open-ended or unfinished. Let me know if you'd like to see a continuation!
+                <% } %> 
+                <% if (genre.startsWith('Tag:')) {%>
+                    <a class="btn btn-secondary p-1" href="/literature/tags">All Tags</a>
+                <% } %> 
+            </p>                
+        </div>
+        <% if(currentUser && currentUser.username==process.env.ADMIN) { %>
+            <div class="container mb-5">
+                <a class="btn btn-outline-secondary btn-sm" href="/literature/new">Add New Work</a>
+            </div>
+            <%}%>
+    </div>
+
+    <%for (let i=0; i<literatures.length; i++) { %>  
+        <div class="d-flex justify-content-around">   
+            
+            <% if (i%2==1) { %> 
+                <div class="card shadow-lg d-none d-sm-block col-4 mx-3 mb-3 text-dark bg-light align-self-start" style="max-width: 20rem;">
+                    <div class="row py-2 px-3">
+                        <% if(literatures[i].image) {%> 
+                        <div class="card-body p-2 img-container" style="background-image: url('<%= literatures[i].image.url %>');" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= literatures[i].imageCredit %>">
+                        </div>
+                        <% } else { %>
+                        <div class="card-body p-2 img-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Photo Unavailable">
+                        </div>
+                        <% } %> 
+                    </div>
+                </div>
+            <% } %> 
+
+            <div class="card shadow-lg col-10 offset-1 col-sm-8 offset-sm-0 mb-3 text-dark bg-light text-center d-flex justify-content-between ms-0 pt-2 pb-3">
+                <% if(literatures[i].image) {%> 
+                <div class="row card-background-index m-2"
+                    style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%=literatures[i].image.url %>') no-repeat center center; background-size:cover;"
+                    data-bs-toggle="tooltip" data-bs-placement="top">
+                <% }else { %> 
+                <div class="row card-background-index m-2"
+                    style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/dkhmagpta/image/upload/v1609849755/sample.jpg %>') no-repeat center center; background-size:cover;"
+                    data-bs-toggle="tooltip" data-bs-placement="top">
+                <% } %> 
+                    <div class="card-body py-0 card-body-background-index" style="background-color: #F5F4EEC1;">
+                        <div class="d-flex p-3 hidden-date-xs">                
+                            <small class="text-muted p-1 hide-date-xs" style="visibility: hidden;"><%=literatures[i].createdAt.toLocaleDateString()%></small>
+                            <h5 class="card-title "><%=literatures[i].title%><% if(literatures[i].part!==1) {%> (#<%= literatures[i].part %>)<% } %></h5>
+                            <small class="text-muted p-1 hide-date-xs"><%=literatures[i].createdAt.toLocaleDateString()%></small>
+                        </div>
+                        <% if(literatures[i].genre=="Quote") {%>
+                            <p class="card-text vertical-truncate-quote m-3" style="white-space: pre-wrap"><%=literatures[i].body%></p>
+                            <p class="p-0 mb-3">By: <%=literatures[i].quoteBy %> </p>    
+                        <% } else { %>
+                            <p class="card-text vertical-truncate m-3" style="white-space: pre-wrap"><%=literatures[i].body%></p>
+                        <% } %> 
+                    </div>
+                </div>
+                <div>
+                    <a class="btn btn-outline-secondary btn-sm mt-2 mb-3" href="/literature/<%=literatures[i]._id%>">View
+                        <% if (literatures[i].genre==='Poem (Youth)' ) { %>
+                            Poem
+                        <% }else if  (literatures[i].genre==='Other' ){ %>
+                        <% }else if  (literatures[i].genre==='Poem (Haiku)' ){ %>
+                            Haiku
+                        <% }else{ %>
+                            <%= literatures[i].genre %>
+                        <% } %>
+                    </a>
+                </div>  
+            </div>
+
+            <% if (i%2==0) { %> 
+            <div class="card shadow-lg d-none d-sm-block d-md-block col-4 mx-3 mb-3 text-dark bg-light align-self-end" style="max-width: 18rem;">
+                <div class="row py-2 px-3">
+                    <% if(literatures[i].image) {%> 
+                    <div class="card-body p-2 img-container" style="background-image: url('<%= literatures[i].image.url %>');" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= literatures[i].imageCredit %>">
+                    </div>
+                    <% } else { %>
+                    <div class="card-body p-2 img-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Original Photo Unavailable">
+                    </div>
+                    <% } %> 
+                </div>
+            </div>
+            <% } %> 
+            
+
+        </div> 
+        <br>
+    <%}%>
+        
+    
+
+        

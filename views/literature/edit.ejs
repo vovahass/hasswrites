@@ -1,0 +1,84 @@
+<% layout('layouts/boilerplateSecondary') %>
+
+<div class="row">
+    <h1 class="text-center mb-5">Editing "<%=literature.title%> #<%=literature.part%>"</h1>
+    <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <form action="/literature/<%=literature._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="literature[title]"
+                    value="<%=literature.title%>" required>
+            </div>
+            <div class=" mb-3">
+                <label class="form-label" for="body">Content</label>
+                <textarea class="form-control" type="text" id="body" name="literature[body]" style="height: 10rem;"
+                    required><%- literature.body%></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <select class="form-select" id="genre" name="literature[genre]" required onchange="quoteCheck(this);">
+                    <option value="Novel" <%if (literature.genre==='Novel') {%> selected <%}%> >Novel</option>
+                    <option value="Poem" <%if (literature.genre==='Poem') {%> selected <%}%>>Poem</option>
+                    <option value="Poem (Youth)" <%if (literature.genre==='Poem (Youth)') {%> selected <%}%>>Poem (Youth)</option>
+                    <option value="Poem (Haiku)" <%if (literature.genre==='Poem (Haiku)') {%> selected <%}%>>Haiku</option>
+                    <option value="Quote" <%if (literature.genre==='Quote') {%> selected <%}%>>Quote</option>
+                    <option value="Writing Prompt" <%if (literature.genre==='Writing Prompt') {%> selected <%}%>>Writing Prompt</option>
+                    <option value="Other" <%if (literature.genre==='Other') {%> selected <%}%>>Other</option>
+                </select>
+            </div>
+            <div class="mb-3" style="display: <%if (literature.genre==='Quote') {%> block; <%} else {%> none <% } %> " id="quoteByDiv">
+                <label class="form-label" for="quoteBy">Quote by</label>
+                <input class="form-control" type="text" id="quoteBy" name="literature[quoteBy]" <%if (literature.genre==='Quote') {%> value="<%=literature.quoteBy%>" <% } %> >
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="notes">My Notes</label>
+                <textarea class="form-control" type="text" id="notes" name="literature[notes]"><%-literature.notes%></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tags">Tags</label>
+                <input class="form-control" type="text" id="tags" name="literature[tags]" value="<%=literature.tags%>"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Change Image</label>
+                <input class="form-control" type="file" id="image" name="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="notes">Credit image to</label>
+                <input class="form-control" type="text" id="notes" name="literature[imageCredit]" value="<%=literature.imageCredit%>">
+            </div>
+            <% if (literature.image) {%> 
+            <div class="mb-3">
+                   <img src="<%=literature.image.thumbnail%>" alt="" class="img-thumbnail">
+                   <div class="form-check-inline">
+                       <input type="checkbox" id="image1" name="deleteImage" value="<%=literature.image.filename%>">
+                       <label for="image1">Delete?</label>
+                   </div> 
+            </div>
+            <% } %> 
+            <div class="mb-3">
+                <label class="form-label" for="part">Part #<%=literature.part%></label>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="createdAt">Creation Date: <%=literature.createdAt.toDateString()%></label>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="updatedAt" value=>Last Updated: </label>                
+                <input class="form-control" type="text" id="updatedAt" name="literature[updatedAt]" value="<%= new Date().toDateString();%>" required readonly>
+            </div>
+            <div class="mb-3 text-center">
+                <button class="btn btn-secondary">Update Literary Work</button>
+            </div>
+        </form>
+        <a class="btn btn-light my-5" href="/literature/<%= literature._id%>">View
+            <% if (literature.genre==='Poem (Youth)') { %>
+            Poem
+            <% }else{ %>
+            <%= literature.genre %>
+            <% } %></a>
+
+    </div>
+
+</div>
+
+<script src="/javascripts/quoteCheck.js"></script>

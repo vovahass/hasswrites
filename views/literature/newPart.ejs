@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplateSecondary') %>
+<div class="row">
+    <h1 class="text-center mb-5">Add <%= literature.title %> (#<%= literature.part +1 %>)</h1>
+    <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <form action="/literature" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="literature[title]" value="<%=literature.title %>" required readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="body">Content</label>
+                <textarea class="form-control" type="text" id="body" name="literature[body]" style="height: 10rem;" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="genre">Genre</label>
+                <select class="form-select" id="genre" name="literature[genre]" required>
+                    <option <% if (literature.genre == 'Novel') {%> selected <% } else {%> disabled <% } %>   value="Novel">Novel</option>
+                    <option <% if (literature.genre == 'Poem') {%> selected <% } else {%> disabled <% } %> value="Poem">Poem</option>
+                    <option <% if (literature.genre == 'Poem (Youth)') {%> selected <% } else {%> disabled <% } %> value="Poem (Youth)">Poem (Youth)</option>
+                    <option <% if (literature.genre == 'Poem (Haiku)') {%> selected <% } else {%> disabled <% } %> value="Poem (Haiku)">Haiku</option>
+                    <option <% if (literature.genre == 'Quote') {%> selected <% } else {%> disabled <% } %> value="Quote">Quote</option>
+                    <option <% if (literature.genre == 'Writing Prompt') {%> selected <% } else {%> disabled <% } %> value="Writing Prompt">Writing Prompt</option>
+                    <option <% if (literature.genre == 'Other') {%> selected <% } else {%> disabled <% } %> value="Other">Other</option>
+                </select>
+            </div>
+            <% if (literature.genre == 'Quote') {%>
+            <div class="mb-3">
+                <label class="form-label" for="notes">Quote by</label>
+                <input class="form-control" type="text" id="notes" name="literature[quoteBy]">
+            </div>
+            <% } %> 
+            <div class="mb-3">
+                <label class="form-label" for="notes">My Notes</label>
+                <textarea class="form-control" type="text" id="notes" name="literature[notes]"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tags">Tags</label>
+                <input class="form-control" type="text" id="tags" name="literature[tags]" value="<%=literature.tags %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Add Image</label>
+                <input class="form-control" type="file" id="image" name="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="notes">Credit image to</label>
+                <input class="form-control" type="text" id="notes" name="literature[imageCredit]">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tags">Part</label>
+                <input class="form-control" type="text" id="tags" name="literature[part]" value="<%=literature.part +1 %>" required readonly>
+            </div>
+            <div class="mb-3" style="visibility: hidden;">
+                <label class="form-label" for="tags">Previous Part</label>
+                <input class="form-control" type="text" id="tags" name="literature[previous_id]" value="<%=literature._id %>" required readonly>
+            </div>
+            
+            <div class="mb-3 text-center d-flex justify-content-between mb-5">
+                <a class="btn btn-light" href="/literature">Back to Main</a>
+                <button class="btn btn-secondary">Add Part <%= literature.part +1 %> </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
